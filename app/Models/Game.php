@@ -50,6 +50,7 @@
         {
             $this->table = 'Game';
             $this->primaryKey = 'Game_ID';
+            $this->timestamps = false;
             $this->fillable = [
                 'Player1_ID',
                 'Player2_ID',

@@ -40,6 +40,7 @@
         {
             $this->table = 'Pawns';
             $this->primaryKey = 'Pawn_ID';
+            $this->timestamps = false;
             $this->fillable = [
                 'Game_ID',
                 'X',

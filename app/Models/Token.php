@@ -34,6 +34,8 @@
         {
             $this->table = 'Api_Token';
             $this->primaryKey = 'Token';
+            $this->timestamps = false;
+            $this->incrementing = false;
             $this->fillable = [
                 'Token',
                 'Player_ID',

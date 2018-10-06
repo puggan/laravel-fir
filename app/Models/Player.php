@@ -37,6 +37,10 @@
         {
             $this->table = 'Persons';
             $this->primaryKey = 'Player_ID';
+            $this->timestamps = false;
+            $this->fillable = [
+                'User_Name',
+            ];
 
             parent::__construct($attributes);
         }
