@@ -70,6 +70,7 @@
             $router->get('/player/{player_id}', 'ApiController@get_player');
             $router->get('/game/{game_id}/grid', 'ApiController@get_grid');
             $router->get('/game/{game_id}/pawns', 'ApiController@get_pawns');
+            $router->get('/game/{game_id}/pawns/{skip}', 'ApiController@get_pawns');
             $router->get('/game/{game_id}', 'ApiController@get_game');
             $router->get('/games/{player_id}', 'ApiController@get_games');
             $router->post('/play/{game_id}/{x}/{y}', 'ApiController@play');
@@ -306,7 +307,7 @@
          * @return \App\Models\Pawn[]
          * @throws InvalidGame
          */
-        public function get_pawns($game_id) : array
+        public function get_pawns($game_id, $skip = 0) : array
         {
             $game = Game::find($game_id);
 
@@ -316,6 +317,10 @@
             }
 
             $query = $game->pawns()->getQuery();
+            if($skip)
+            {
+                $query->where('NR', '>', $skip);
+            }
             $query->orderBy('NR');
             return $query->get()->toArray();
         }
