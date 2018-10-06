@@ -59,4 +59,17 @@
         {
             return $this->belongsTo(Player::class, 'Player_ID');
         }
+
+        /**
+         * @param $player_id
+         *
+         * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+         * @throws \InvalidArgumentException
+         */
+        public static function clean($player_id)
+        {
+            $query = Token::query();
+            $query->where('Player_ID', '=', $player_id);
+            $query->delete();
+        }
     }

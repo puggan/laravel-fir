@@ -162,6 +162,7 @@
                 $player->save();
             }
 
+            Token::clean($player->Player_ID);
             $token = new Token(['Player_ID' => $player->Player_ID]);
             $token->save();
             $result = $token->toArray();
@@ -193,6 +194,7 @@
                 throw new InvalidPlayer('Non-existing username');
             }
 
+            Token::clean($player->Player_ID);
             $token = new Token(['Player_ID' => $player->Player_ID]);
             $token->save();
             $result = $token->toArray();
