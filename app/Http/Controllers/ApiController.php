@@ -369,13 +369,13 @@
          * @param $x
          * @param $y
          *
-         * @return string
+         * @return mixed[]
          * @throws InvalidGame
          * @throws InvalidPlayer
          * @throws \App\Exceptions\Api\InvalidMove
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          */
-        public function play($game_id, $x, $y) : string
+        public function play($game_id, $x, $y) : array
         {
             $this->require_player();
 
@@ -408,6 +408,8 @@
                     throw new InvalidMove('Non-playable Game');
             }
 
-            return 'OK';
+            $games = Game::add_player_names([$game]);
+
+            return $games[0];
         }
     }
