@@ -185,7 +185,7 @@
                 <p>Start a new game agains an opponenet.</p>
             </li>
             <li>
-                <h3>/api/plat/<span>[game_id]</span>/<span>[x]</span>/<span>[y]</span></h3>
+                <h3>/api/play/<span>[game_id]</span>/<span>[x]</span>/<span>[y]</span></h3>
                 <dl>
                     <dt>Request type</dt>
                     <dd>POST</dd>

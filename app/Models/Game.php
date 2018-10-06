@@ -235,6 +235,7 @@
 
         /**
          * @param C|Game[] $games
+         *
          * @return mixed[][]
          */
         public static function add_player_names($games) : array
@@ -253,10 +254,11 @@
                 {
                     $missing_players[$game->Player2_ID] = $game->Player2_ID;
                 }
-                $game_list[] = $game->toArray();
+                $game_list[] = $game->attributesToArray();
             }
 
-            if($missing_players) {
+            if($missing_players)
+            {
                 foreach(Player::findMany($missing_players) as $player)
                 {
                     $players[$player->Player_ID] = $player->User_Name;

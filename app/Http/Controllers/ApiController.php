@@ -113,7 +113,7 @@
 
             if(!$game)
             {
-                return  NULL;
+                return NULL;
             }
 
             $games = Game::add_player_names([$game]);
