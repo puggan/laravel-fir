@@ -231,11 +231,11 @@
             }
             if($count & 1)
             {
-                $this->Status = self::WON_BY_PLAYER2;
+                $this->Status = self::WAITING_FOR_PLAYER2;
                 $this->save();
                 return;
             }
-            $this->Status = self::WON_BY_PLAYER1;
+            $this->Status = self::WAITING_FOR_PLAYER1;
             $this->save();
         }
     }

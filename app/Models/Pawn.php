@@ -26,8 +26,8 @@
      */
     class Pawn extends Model
     {
-        public const COLOR1 = 'red';
-        public const COLOR2 = 'blue';
+        public const COLOR1 = 'Red';
+        public const COLOR2 = 'Blue';
 
         /**
          * Pawn constructor.
