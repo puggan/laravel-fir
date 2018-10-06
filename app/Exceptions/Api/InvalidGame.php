@@ -12,5 +12,4 @@
 
     class InvalidGame extends ApiException
     {
-
     }

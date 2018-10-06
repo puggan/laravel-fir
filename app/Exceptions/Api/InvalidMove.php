@@ -12,5 +12,4 @@
 
     class InvalidMove extends ApiException
     {
-
     }

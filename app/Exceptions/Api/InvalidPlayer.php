@@ -12,5 +12,4 @@
 
     class InvalidPlayer extends ApiException
     {
-
     }
