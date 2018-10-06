@@ -10,6 +10,7 @@
 
     use Illuminate\Contracts\Support\Responsable;
     use Illuminate\Http\Response;
+    use Illuminate\Support\Arr;
 
     abstract class ApiException extends \Exception implements Responsable
     {
@@ -24,17 +25,27 @@
          */
         public function toResponse($request)
         {
+            $data = [
+                'ok' => FALSE,
+                'message' => $this->getMessage(),
+                'type' => str_replace(
+                    'App\\Exceptions\\',
+                    '',
+                    \get_class($this)
+                ),
+            ];
+            if(config('app.debug'))
+            {
+                $data['file'] = $this->getFile();
+                $data['line'] = $this->getLine();
+                $data['trace'] = collect($this->getTrace())->map(
+                    function ($trace) {
+                        return Arr::except($trace, ['args']);
+                    }
+                )->all();
+            }
             return new Response(
-                [
-                    'ok' => FALSE,
-                    'message' => $this->getMessage(),
-                    'type' => str_replace(
-                        'App\\Exceptions\\',
-                        '',
-                        \get_class($this)
-                    ),
-                ],
-                400
+                $data, 400
             );
         }
     }
