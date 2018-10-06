@@ -188,6 +188,33 @@
         }
 
         /**
+         * @throws InvalidGame
+         */
+        public function validate_pawns() : void
+        {
+            $next_free = [0, 0, 0, 0, 0, 0, 0];
+            $query = $this->pawns()->getQuery();
+            $query->orderBy('NR');
+            foreach($query->get() as $pawn)
+            {
+                /** @var Pawn $pawn */
+                $expected_color = ($pawn->NR & 1) ? Pawn::COLOR1 : Pawn::COLOR2;
+                if($pawn->Color !== $expected_color)
+                {
+                    $this->Status = '';
+                    throw new InvalidGame('Pawns played in wrong order.');
+                }
+                if($next_free[$pawn->X] !== $pawn->Y)
+                {
+                    $this->Status = '';
+                    throw new InvalidGame('Pawns played in wring hight.');
+                }
+                $next_free[$pawn->X] = $pawn->Y + 1;
+            }
+            $this->update_status();
+        }
+
+        /**
          * @return void
          */
         public function update_status() : void
@@ -237,6 +264,7 @@
          * @param C|Game[] $games
          *
          * @return mixed[][]
+         * @throws InvalidGame
          */
         public static function add_player_names($games) : array
         {
@@ -246,6 +274,9 @@
             $game_list = [];
             foreach($games as $game)
             {
+                // Validate
+                $game->validate_pawns();
+
                 if(empty($players[$game->Player1_ID]))
                 {
                     $missing_players[$game->Player1_ID] = $game->Player1_ID;
