@@ -71,7 +71,7 @@
                     <dd>GET</dd>
 
                     <dt>Response Type</dt>
-                    <dd>JSON - Pawn[][]</dd>
+                    <dd>JSON - Pawn[]</dd>
 
                     <dt>URL Parameter - game_id</dt>
                     <dd>Unsigned Int</dd>
@@ -234,7 +234,7 @@
                     <dd>Unsigned Int</dd>
 
                     <dt>Player1_ID</dt>
-                    <dd>Unsigned Int - Y</dd>
+                    <dd>Unsigned Int</dd>
 
                     <dt>Player2_ID</dt>
                     <dd>Unsigned Int</dd>
@@ -290,14 +290,8 @@
             </li>
             <li>
                 <h3>JSON - Pawn[]</h3>
-                <p>An row of JSON - Pawn.</p>
-                <p>Indexed for column 0 to 6.</p>
-            </li>
-            <li>
-                <h3>JSON - Pawn[][]</h3>
-                <p>All row of JSON - Pawn[].</p>
-                <p>Indexed for row 0 to 5.</p>
-                <p>use as: pawns[y][x].</p>
+                <p>An list of JSON - Pawn.</p>
+                <p>Indexed in played order, 0 to 41.</p>
             </li>
             <li>
                 <h3>JSON - Player</h3>

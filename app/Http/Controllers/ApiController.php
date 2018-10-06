@@ -293,7 +293,9 @@
                 throw new InvalidGame('Invalid Game_ID');
             }
 
-            return $game->pawns->toArray();
+            $query = $game->pawns()->getQuery();
+            $query->orderBy('NR');
+            return $query->get()->toArray();
         }
 
         /**
