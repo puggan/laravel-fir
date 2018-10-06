@@ -10,20 +10,29 @@
 
     use App\Relations\HasManyUnion;
     use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Support\Collection as C;
 
     /**
      * Class Person
      * @package App\Models
      * @property int Player_ID
      * @property string User_Name
-     * @property Game[] games
-     * @property Game[] p1_games
-     * @property Game[] p2_games
+     * @property C|Game[] games
+     * @property C|Game[] p1_games
+     * @property C|Game[] p2_games
      *
-     * @method static self find(int $id)
+     * @method static Player find(int $id)
      */
     class Player extends Model
     {
+        /**
+         * Player constructor.
+         *
+         * @param array $attributes
+         *
+         * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+         */
         public function __construct(array $attributes = [])
         {
             $this->table = 'Persons';
@@ -32,7 +41,10 @@
             parent::__construct($attributes);
         }
 
-        function games()
+        /**
+         * @return HasManyUnion
+         */
+        public function games() : HasMany
         {
             $instance = $this->newRelatedInstance(Game::class);
 
@@ -49,12 +61,18 @@
             );
         }
 
-        function p1_games()
+        /**
+         * @return HasMany
+         */
+        public function p1_games() : HasMany
         {
             return $this->hasMany(Game::class, 'Player1_ID');
         }
 
-        function p2_games()
+        /**
+         * @return HasMany
+         */
+        public function p2_games() : HasMany
         {
             return $this->hasMany(Game::class, 'Player2_ID');
         }

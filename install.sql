@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Api_Token;
 DROP TABLE IF EXISTS Pawns;
 DROP TABLE IF EXISTS Game;
 DROP TABLE IF EXISTS Persons;
@@ -34,4 +35,12 @@ CREATE TABLE `Pawns` (
 	UNIQUE KEY `Pawns_Positon_Taken` (`Game_ID`,`X`,`Y`) USING BTREE,
 	UNIQUE KEY `Pawns_order` (`Game_ID`,`NR`) USING BTREE,
 	CONSTRAINT `Pawns_ibfk_1` FOREIGN KEY (`Game_ID`) REFERENCES `Game` (`Game_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Api_Token` (
+    `Token` char(32) NOT NULL,
+    `Player_ID` bigint(20) unsigned NOT NULL,
+    PRIMARY KEY (`Token`),
+    KEY `Player_ID` (`Player_ID`),
+    CONSTRAINT `Api_Token_ibfk_1` FOREIGN KEY (`Player_ID`) REFERENCES `Persons` (`Player_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

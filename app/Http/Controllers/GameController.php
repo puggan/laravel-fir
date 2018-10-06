@@ -1,17 +1,30 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: puggan
-     * Date: 2018-10-05
-     * Time: 18:54
-     */
 
     namespace App\Http\Controllers;
 
     use App\Models\Game;
+    use Illuminate\Routing\Router;
 
+    /**
+     * Class GameController
+     * @package App\Http\Controllers
+     */
     class GameController extends Controller
     {
+        /**
+         * @param Router $router
+         */
+        public static function routes($router) : void
+        {
+            $router->get('/game/{id}', 'GameController@view');
+        }
+
+        /**
+         * @param $id
+         *
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+         * @throws \LogicException
+         */
         public function view($id)
         {
             $game = Game::find($id);

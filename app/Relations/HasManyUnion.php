@@ -12,6 +12,8 @@
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\HasMany;
 
+    /** @noinspection LongInheritanceChainInspection */
+
     /**
      * Class HasManyUnion
      * @package App\Relations
@@ -35,7 +37,7 @@
         /**
          * @throws \InvalidArgumentException
          */
-        public function addConstraints()
+        public function addConstraints() : void
         {
             if(static::$constraints)
             {

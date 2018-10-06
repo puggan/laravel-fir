@@ -11,13 +11,17 @@
 	 |
 	 */
 
+    use App\Http\Controllers\GameController;
     use Illuminate\Support\Facades\Route;
 
-    Route::get(
+    /** @var \Illuminate\Routing\Router $router */
+    $router = Route::getFacadeRoot();
+
+    $router->get(
         '/',
         function () {
             return redirect('/game/1');
         }
     );
 
-    Route::get('/game/{id}', 'GameController@view');
+    GameController::routes($router);

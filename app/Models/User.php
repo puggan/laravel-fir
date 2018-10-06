@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -11,20 +10,20 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * User constructor.
      *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
+     * @param array $attributes
      *
-     * @var array
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function __construct(array $attributes = [])
+    {
+        $this->fillable = [
+            'name', 'email', 'password',
+        ];
+        $this->hidden = [
+            'password', 'remember_token',
+        ];
+        parent::__construct($attributes);
+    }
 }
