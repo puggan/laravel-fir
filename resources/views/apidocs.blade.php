@@ -62,7 +62,7 @@
                     <dd>Unsigned Int</dd>
                 </dl>
                 <p>Get the grid for a given game.</p>
-                <p>See also /pawns</p>
+                <p>See also /pawns.</p>
             </li>
             <li>
                 <h3>/api/game/<span>[game_id]</span>/pawns</h3>
@@ -77,7 +77,7 @@
                     <dd>Unsigned Int</dd>
                 </dl>
                 <p>Get the pawns for a given game.</p>
-                <p>See also /grid</p>
+                <p>See also /grid.</p>
             </li>
             <li>
                 <h3>/api/player/<span>[player_id]</span></h3>
@@ -91,7 +91,7 @@
                     <dt>URL Parameter - player_id</dt>
                     <dd>Unsigned Int</dd>
                 </dl>
-                <p>Get info about a player</p>
+                <p>Get info about a player.</p>
             </li>
             <li>
                 <h3>/api/games/<span>[player_id]</span></h3>
@@ -211,22 +211,24 @@
         <ul>
             <li>
                 <h3>Unsigned Int - X</h3>
+                <p>Range: 0 to 6.</p>
                 <p>The left most column is 0.</p>
                 <p>The right most column is 6.</p>
             </li>
             <li>
                 <h3>Unsigned Int - Y</h3>
+                <p>Range: 0 to 5.</p>
                 <p>The bottom column i 0.</p>
                 <p>The top most column i 5.</p>
             </li>
             <li>
                 <h3>Unsigned Int - Pawn Number</h3>
-                <p>Range: 1 - 42</p>
-                <p>First pawn placed in a game, is Nr 1</p>
+                <p>Range: 1 - 42.</p>
+                <p>First pawn placed in a game, is Nr 1.</p>
             </li>
             <li>
                 <h3>JSON - Game</h3>
-                <p>A game between 2 players</p>
+                <p>A game between 2 players.</p>
                 <dl>
                     <dt>Game_ID</dt>
                     <dd>Unsigned Int</dd>
@@ -246,7 +248,7 @@
             </li>
             <li>
                 <h3>JSON - Game[]</h3>
-                <p>A list of JSON - Game</p>
+                <p>A list of JSON - Game.</p>
             </li>
             <li>
                 <h3>JSON - PawnState</h3>
@@ -258,17 +260,17 @@
             <li>
                 <h3>JSON - PawnState[]</h3>
                 <p>An row of JSON - PawnState.</p>
-                <p>Indexed for column 0 to 6</p>
+                <p>Indexed for column 0 to 6.</p>
             </li>
             <li>
                 <h3>JSON - PawnState[][]</h3>
                 <p>All row of JSON - PawnState[].</p>
-                <p>Indexed for row 0 to 5</p>
-                <p>use as: pawnstates[y][x]</p>
+                <p>Indexed for row 0 to 5.</p>
+                <p>use as: pawnstates[y][x].</p>
             </li>
             <li>
                 <h3>JSON - Pawn</h3>
-                <p>A pawn in the game</p>
+                <p>A pawn in the game.</p>
                 <dl>
                     <dt>Game_ID</dt>
                     <dd>Unsigned Int</dd>
@@ -289,13 +291,13 @@
             <li>
                 <h3>JSON - Pawn[]</h3>
                 <p>An row of JSON - Pawn.</p>
-                <p>Indexed for column 0 to 6</p>
+                <p>Indexed for column 0 to 6.</p>
             </li>
             <li>
                 <h3>JSON - Pawn[][]</h3>
                 <p>All row of JSON - Pawn[].</p>
-                <p>Indexed for row 0 to 5</p>
-                <p>use as: pawns[y][x]</p>
+                <p>Indexed for row 0 to 5.</p>
+                <p>use as: pawns[y][x].</p>
             </li>
             <li>
                 <h3>JSON - Player</h3>
@@ -322,11 +324,11 @@
             </li>
             <li>
                 <h3>String - Username</h3>
-                <p>Lengt: 1 to 255</p>
+                <p>Lengt: 1 to 255.</p>
             </li>
             <li>
                 <h3>String - Token</h3>
-                <p>Lengt: 32</p>
+                <p>Lengt: 32.</p>
             </li>
             <li>
                 <h3>String - Color</h3>
@@ -349,8 +351,8 @@
             </li>
             <li>
                 <h3>String - Datetime</h3>
-                <p>Lengt: 19</p>
-                <p>Format: YYYY-MM-DD HH:II:SS</p>
+                <p>Lengt: 19.</p>
+                <p>Format: YYYY-MM-DD HH:II:SS.</p>
             </li>
         </ul>
         <script>
