@@ -184,7 +184,7 @@
                     return;
             }
 
-            throw new InvalidGame('Non-playable Game');
+            throw new InvalidMove('Non-playable Game');
         }
 
         /**

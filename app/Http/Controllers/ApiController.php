@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
 
     use App\Exceptions\Api\InvalidGame;
+    use App\Exceptions\Api\InvalidMove;
     use App\Exceptions\Api\InvalidPlayer;
     use App\Models\Game;
     use App\Models\Player;
@@ -397,7 +398,7 @@
                     break;
 
                 default:
-                    throw new InvalidGame('Non-playable Game');
+                    throw new InvalidMove('Non-playable Game');
             }
 
             return 'OK';
