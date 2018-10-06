@@ -244,6 +244,12 @@
 
                     <dt>Start_Time</dt>
                     <dd>String - Datetime</dd>
+
+                    <dt>Player1</dt>
+                    <dd>String - Username</dd>
+
+                    <dt>Player2</dt>
+                    <dd>String - Username</dd>
                 </dl>
             </li>
             <li>

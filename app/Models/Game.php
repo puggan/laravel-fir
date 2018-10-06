@@ -1,10 +1,4 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: puggan
-     * Date: 2018-10-05
-     * Time: 18:03
-     */
 
     namespace App\Models;
 
@@ -50,7 +44,7 @@
         {
             $this->table = 'Game';
             $this->primaryKey = 'Game_ID';
-            $this->timestamps = false;
+            $this->timestamps = FALSE;
             $this->fillable = [
                 'Player1_ID',
                 'Player2_ID',
@@ -152,18 +146,18 @@
         {
             if($x < 0 || $x > 6 || $y < 0 || $y > 5)
             {
-                throw new InvalidMove('cordinates outside range');
+                throw new InvalidMove('coordinate outside range');
             }
 
             $grid = $this->get_grid();
             if($grid[$y][$x])
             {
-                throw new InvalidMove('cordinates taken');
+                throw new InvalidMove('coordinate taken');
             }
 
             if($y && !$grid[$y - 1][$x])
             {
-                throw new InvalidMove('cordinate bellow not taken');
+                throw new InvalidMove('coordinate bellow not taken');
             }
 
             $pawn = new Pawn(
@@ -237,5 +231,44 @@
             }
             $this->Status = self::WAITING_FOR_PLAYER1;
             $this->save();
+        }
+
+        /**
+         * @param C|Game[] $games
+         * @return mixed[][]
+         */
+        public static function add_player_names($games) : array
+        {
+            static $players = [];
+
+            $missing_players = [];
+            $game_list = [];
+            foreach($games as $game)
+            {
+                if(empty($players[$game->Player1_ID]))
+                {
+                    $missing_players[$game->Player1_ID] = $game->Player1_ID;
+                }
+                if(empty($players[$game->Player2_ID]))
+                {
+                    $missing_players[$game->Player2_ID] = $game->Player2_ID;
+                }
+                $game_list[] = $game->toArray();
+            }
+
+            if($missing_players) {
+                foreach(Player::findMany($missing_players) as $player)
+                {
+                    $players[$player->Player_ID] = $player->User_Name;
+                }
+            }
+
+            foreach($game_list as &$game)
+            {
+                $game['Player1'] = $players[$game['Player1_ID']];
+                $game['Player2'] = $players[$game['Player2_ID']];
+            }
+
+            return $game_list;
         }
     }

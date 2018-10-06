@@ -75,13 +75,17 @@
             $router->get('/', 'ApiController@docs');
         }
 
+        /**
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         * @throws \LogicException
+         */
         public function docs()
         {
             return view('apidocs');
         }
 
         /**
-         * @return Game|null
+         * @return Game||mixed[]|null
          * @throws InvalidPlayer
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          * @throws \InvalidArgumentException
@@ -106,7 +110,14 @@
             /** @noinspection OneTimeUseVariablesInspection */
             $game = $query->first();
 
-            return $game;
+            if(!$game)
+            {
+                return  NULL;
+            }
+
+            $games = Game::add_player_names([$game]);
+
+            return $games[0];
         }
 
         /**
@@ -139,10 +150,13 @@
             /** @var Player $player */
             $player = $query->first();
 
-            if(!$player) {
-                $player = new Player([
-                    'User_Name' => $username,
-                ]);
+            if(!$player)
+            {
+                $player = new Player(
+                    [
+                        'User_Name' => $username,
+                    ]
+                );
                 $player->save();
             }
 
@@ -193,7 +207,8 @@
         public function get_player($player_id) : Player
         {
             $player = Player::find($player_id);
-            if(!$player) {
+            if(!$player)
+            {
                 throw new InvalidPlayer('player not found');
             }
 
@@ -201,7 +216,7 @@
         }
 
         /**
-         * @return Game
+         * @return Game||mixed[]
          * @throws InvalidPlayer
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          * @throws \InvalidArgumentException
@@ -216,7 +231,8 @@
             /** @var Player $other_player */
             $other_player = $query->first();
 
-            if(!$other_player) {
+            if(!$other_player)
+            {
                 throw new InvalidPlayer('Opponent not found');
             }
 
@@ -259,7 +275,10 @@
                 ]
             );
             $game->save();
-            return $game;
+
+            $games = Game::add_player_names([$game]);
+
+            return $games[0];
         }
 
         /**
@@ -272,7 +291,8 @@
         {
             $game = Game::find($game_id);
 
-            if(!$game) {
+            if(!$game)
+            {
                 throw new InvalidGame('Invalid Game_ID');
             }
 
@@ -289,7 +309,8 @@
         {
             $game = Game::find($game_id);
 
-            if(!$game) {
+            if(!$game)
+            {
                 throw new InvalidGame('Invalid Game_ID');
             }
 
@@ -301,34 +322,38 @@
         /**
          * @param $game_id
          *
-         * @return Game
+         * @return Game|mixed[]
          * @throws InvalidGame
          */
-        public function get_game($game_id) : Game
+        public function get_game($game_id) : array
         {
             $game = Game::find($game_id);
 
-            if(!$game) {
+            if(!$game)
+            {
                 throw new InvalidGame('Invalid Game_ID');
             }
 
-            return $game;
+            $games = Game::add_player_names([$game]);
+
+            return $games[0];
         }
 
         /**
          * @param $player_id
          *
-         * @return Game[]
+         * @return Game[]||mixed[][]
          * @throws InvalidPlayer
          */
         public function get_games($player_id) : array
         {
             $player = Player::find($player_id);
-            if(!$player) {
+            if(!$player)
+            {
                 throw new InvalidPlayer('player not found');
             }
 
-            return $player->games;
+            return Game::add_player_names($player->games);
         }
 
         /**
@@ -348,21 +373,24 @@
 
             $game = Game::find($game_id);
 
-            if(!$game) {
+            if(!$game)
+            {
                 throw new InvalidGame('Invalid Game_ID');
             }
 
             switch($game->Status)
             {
                 case Game::WAITING_FOR_PLAYER1:
-                    if($game->Player1_ID !== $this->player->Player_ID) {
+                    if($game->Player1_ID !== $this->player->Player_ID)
+                    {
                         throw new InvalidPlayer('Not your turn');
                     }
                     $game->play($x, $y);
                     break;
 
                 case Game::WAITING_FOR_PLAYER2:
-                    if($game->Player2_ID !== $this->player->Player_ID) {
+                    if($game->Player2_ID !== $this->player->Player_ID)
+                    {
                         throw new InvalidPlayer('Not your turn');
                     }
                     $game->play($x, $y);

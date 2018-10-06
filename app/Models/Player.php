@@ -1,10 +1,4 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: puggan
-     * Date: 2018-10-05
-     * Time: 18:03
-     */
 
     namespace App\Models;
 
@@ -23,6 +17,7 @@
      * @property C|Game[] p2_games
      *
      * @method static Player find(int $id)
+     * @method static Player[] findMany(int[] $ids)
      */
     class Player extends Model
     {
