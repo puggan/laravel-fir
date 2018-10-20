@@ -223,12 +223,13 @@
         }
 
         /**
-         * @return Game||mixed[]
+         * @return Game|mixed[]
          * @throws InvalidPlayer
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          * @throws \InvalidArgumentException
+         * @throws InvalidGame
          */
-        public function add_game() : Game
+        public function add_game() : array
         {
             $this->require_player();
 
@@ -396,7 +397,6 @@
                     {
                         throw new InvalidPlayer('Not your turn');
                     }
-                    $game->play($x, $y);
                     break;
 
                 case Game::WAITING_FOR_PLAYER2:
@@ -404,13 +404,13 @@
                     {
                         throw new InvalidPlayer('Not your turn');
                     }
-                    $game->play($x, $y);
                     break;
 
                 default:
                     throw new InvalidMove('Non-playable Game');
             }
 
+            $game->play($x, $y);
             $games = Game::add_player_names([$game]);
 
             return $games[0];
