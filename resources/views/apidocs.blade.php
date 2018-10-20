@@ -94,7 +94,7 @@
                 <p>Get info about a player.</p>
             </li>
             <li>
-                <h3>/api/games/<span>[player_id]</span></h3>
+                <h3>/api/player/<span>[player_id]</span>/games</h3>
                 <dl>
                     <dt>Request type</dt>
                     <dd>GET</dd>

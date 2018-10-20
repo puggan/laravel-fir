@@ -67,14 +67,17 @@
             $router->post('/player/add', 'ApiController@add_player');
             $router->post('/player/auth', 'ApiController@auth_player');
             $router->post('/game/add', 'ApiController@add_game');
+            $router->get('/player/{player_id}/games', 'ApiController@get_games');
             $router->get('/player/{player_id}', 'ApiController@get_player');
             $router->get('/game/{game_id}/grid', 'ApiController@get_grid');
             $router->get('/game/{game_id}/pawns', 'ApiController@get_pawns');
             $router->get('/game/{game_id}/pawns/{skip}', 'ApiController@get_pawns');
             $router->get('/game/{game_id}', 'ApiController@get_game');
-            $router->get('/games/{player_id}', 'ApiController@get_games');
             $router->post('/play/{game_id}/{x}/{y}', 'ApiController@play');
             $router->get('/', 'ApiController@docs');
+
+            /** @deprecated  */
+            $router->get('/games/{player_id}', 'ApiController@get_games');
         }
 
         /**
