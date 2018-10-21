@@ -41,11 +41,11 @@
             {
                 try
                 {
-                    $this->Token = base64_encode(random_bytes(24));
+                    $this->Token = self::base64url_encode(random_bytes(24));
                 }
                 catch(\Exception $e)
                 {
-                    $this->Token = base64_encode(
+                    $this->Token = self::base64url_encode(
                         $d = (new \DateTime())->format('y-m-d H:i:s u')
                     );
                 }
@@ -71,5 +71,19 @@
             $query = Token::query();
             $query->where('Player_ID', '=', $player_id);
             $query->delete();
+        }
+
+        /**
+         * @see https://tools.ietf.org/html/rfc4648#section-5
+         * @param string $s unencoded string
+         * @return string encoded string
+         */
+        public static function base64url_encode($s)
+        {
+            strtr(base64_encode($s), [
+                '+' => '-',
+                '/' => '_',
+                '=' => '',
+            ]);
         }
     }

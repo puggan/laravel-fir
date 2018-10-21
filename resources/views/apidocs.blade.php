@@ -329,6 +329,10 @@
             <li>
                 <h3>String - Token</h3>
                 <p>Lengt: 32.</p>
+                <p>
+                    32 characters from the set of 64 characters in
+                    <a href="https://tools.ietf.org/html/rfc4648#section-5">base64url</a>
+                </p>
             </li>
             <li>
                 <h3>String - Color</h3>
