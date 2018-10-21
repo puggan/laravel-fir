@@ -66,9 +66,9 @@
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          * @throws \InvalidArgumentException
          */
-        public static function clean($player_id)
+        public static function clean($player_id) :void
         {
-            $query = Token::query();
+            $query = self::query();
             $query->where('Player_ID', '=', $player_id);
             $query->delete();
         }
@@ -78,9 +78,9 @@
          * @param string $s unencoded string
          * @return string encoded string
          */
-        public static function base64url_encode($s)
+        public static function base64url_encode($s) : string
         {
-            strtr(base64_encode($s), [
+            return strtr(base64_encode($s), [
                 '+' => '-',
                 '/' => '_',
                 '=' => '',
