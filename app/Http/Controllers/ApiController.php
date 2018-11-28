@@ -434,6 +434,9 @@
             if($this->player->in_queue) {
                 $this->player->in_queue->Start_Time = new Carbon();
                 $this->player->in_queue->save();
+            } else {
+                $q = new Queue(['Player_id' => $this->player->Player_ID]);
+                $q->save();
             }
 
             $other_player_id = $this->player->randomMatch();
