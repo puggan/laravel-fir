@@ -111,6 +111,7 @@
             {
                 return 0;
             }
-            return array_rand($ids);
+
+            return array_rand(array_combine($ids, $ids));
         }
     }
