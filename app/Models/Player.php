@@ -5,6 +5,9 @@
     use App\Relations\HasManyUnion;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Database\Eloquent\Relations\HasOne;
+    use Illuminate\Database\Query\Builder;
+    use Illuminate\Database\Query\JoinClause;
     use Illuminate\Support\Collection as C;
 
     /**
@@ -15,6 +18,7 @@
      * @property C|Game[] games
      * @property C|Game[] p1_games
      * @property C|Game[] p2_games
+     * @property Queue in_queue
      *
      * @method static Player find(int $id)
      * @method static Player[] findMany(int[] $ids)
@@ -74,5 +78,39 @@
         public function p2_games() : HasMany
         {
             return $this->hasMany(Game::class, 'Player2_ID');
+        }
+
+        /**
+         * @return HasOne
+         */
+        public function in_queue() : HasOne
+        {
+            return $this->hasOne(Queue::class);
+        }
+
+        public function randomMatch() : int
+        {
+            /** @var Builder $query */
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $query = Queue::query()->getQuery();
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $query->leftJoin('Game', function($join) {
+                /** @var $join JoinClause */
+                $join->on('Game.Player2_ID', '=', 'Queue.Player_ID');
+                $join->where('Game.Player1_ID', '=', $this->Player_ID);
+                $join->where('Game.Status', 'LIKE', 'Wait%');
+            });
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $query->where('Queue.Player_ID', '<>', $this->Player_ID);
+            $query->whereNull('Game.Game_ID');
+            $query->orderBy('Queue.Start_Time', 'desc');
+            $query->limit(10);
+            $ids = $query->list('Queue.Player_ID');
+
+            if(!$ids)
+            {
+                return 0;
+            }
+            return array_rand($ids);
         }
     }

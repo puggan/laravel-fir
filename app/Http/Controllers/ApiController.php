@@ -7,7 +7,9 @@
     use App\Exceptions\Api\InvalidPlayer;
     use App\Models\Game;
     use App\Models\Player;
+    use App\Models\Queue;
     use App\Models\Token;
+    use Carbon\Carbon;
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Http\Request;
     use Illuminate\Routing\Router;
@@ -66,6 +68,7 @@
             $router->post('/whoami', 'ApiController@whoami');
             $router->post('/player/add', 'ApiController@add_player');
             $router->post('/player/auth', 'ApiController@auth_player');
+            $router->post('/game/add/random', 'ApiController@random_game');
             $router->post('/game/add', 'ApiController@add_game');
             $router->get('/player/{player_id}/games', 'ApiController@get_games');
             $router->get('/player/{player_id}', 'ApiController@get_player');
@@ -411,6 +414,42 @@
             }
 
             $game->play($x, $y);
+            $games = Game::add_player_names([$game]);
+
+            return $games[0];
+        }
+
+        /**
+         * @return array
+         * @throws InvalidGame
+         * @throws InvalidPlayer
+         * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+         * @throws \InvalidArgumentException
+         */
+        public function random_game() : array
+        {
+            $this->require_player();
+
+            if($this->player->in_queue) {
+                $this->player->in_queue->Start_Time = new Carbon();
+                $this->player->in_queue->save();
+            }
+
+            $other_player_id = $this->player->randomMatch();
+
+            if(!$other_player_id) {
+                return ['status' => 'queued'];
+            }
+
+            $game = new Game(
+                [
+                    'Player1_ID' => $this->player->Player_ID,
+                    'Player2_ID' => $other_player_id,
+                    'Status' => Game::WAITING_FOR_PLAYER1,
+                ]
+            );
+            $game->save();
+
             $games = Game::add_player_names([$game]);
 
             return $games[0];
