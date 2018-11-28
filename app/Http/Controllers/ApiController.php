@@ -158,15 +158,16 @@
             /** @var Player $player */
             $player = $query->first();
 
-            if(!$player)
-            {
-                $player = new Player(
-                    [
-                        'User_Name' => $username,
-                    ]
-                );
-                $player->save();
+            if($player) {
+                throw new InvalidPlayer('Username Exists');
             }
+
+            $player = new Player(
+                [
+                    'User_Name' => $username,
+                ]
+            );
+            $player->save();
 
             Token::clean($player->Player_ID);
             $token = new Token(['Player_ID' => $player->Player_ID]);
