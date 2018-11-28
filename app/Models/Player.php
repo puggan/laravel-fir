@@ -85,7 +85,7 @@
          */
         public function in_queue() : HasOne
         {
-            return $this->hasOne(Queue::class);
+            return $this->hasOne(Queue::class, 'Player_ID');
         }
 
         public function randomMatch() : int
