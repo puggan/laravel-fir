@@ -105,7 +105,7 @@
             $query->whereNull('Game.Game_ID');
             $query->orderBy('Queue.Start_Time', 'desc');
             $query->limit(10);
-            $ids = $query->list('Queue.Player_ID');
+            $ids = $query->pluck('Queue.Player_ID')->toArray();
 
             if(!$ids)
             {
