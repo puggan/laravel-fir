@@ -274,19 +274,17 @@
             /** @var Game $game */
             $game = $query->first();
 
-            if($game)
+            if(!$game)
             {
-                return $game;
+                $game = new Game(
+                    [
+                        'Player1_ID' => $this->player->Player_ID,
+                        'Player2_ID' => $other_player->Player_ID,
+                        'Status' => Game::WAITING_FOR_PLAYER1,
+                    ]
+                );
+                $game->save();
             }
-
-            $game = new Game(
-                [
-                    'Player1_ID' => $this->player->Player_ID,
-                    'Player2_ID' => $other_player->Player_ID,
-                    'Status' => Game::WAITING_FOR_PLAYER1,
-                ]
-            );
-            $game->save();
 
             $games = Game::add_player_names([$game]);
 
