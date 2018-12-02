@@ -15,6 +15,7 @@
      * @property int Y
      * @property string Color
      * @property int NR
+     * @property Carbon Time
      * @property Game game
      *
      * @method static Pawn find(int $id)

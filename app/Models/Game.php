@@ -18,6 +18,7 @@
      * @property int Player2_ID
      * @property string Status
      * @property Carbon Start_Time
+     * @property Carbon Changed_Time
      * @property C|Pawn[] pawns
      * @property Player player1
      * @property Player player2
@@ -174,13 +175,13 @@
                 case self::WAITING_FOR_PLAYER1:
                     $pawn->Color = Pawn::COLOR1;
                     $pawn->save();
-                    $this->update_status();
+                    $this->update_status(true);
                     return;
 
                 case self::WAITING_FOR_PLAYER2:
                     $pawn->Color = Pawn::COLOR2;
                     $pawn->save();
-                    $this->update_status();
+                    $this->update_status(true);
                     return;
             }
 
@@ -212,13 +213,16 @@
                 }
                 $next_free[$pawn->X] = $pawn->Y + 1;
             }
-            $this->update_status();
+            $this->update_status(false);
         }
 
         /**
+         * @param bool $update_time set Changed_Time?
+         *
          * @return void
+         * @throws \InvalidArgumentException
          */
-        public function update_status() : void
+        public function update_status($update_time = false) : void
         {
             $winner = NULL;
             $this->load('pawns');
@@ -258,6 +262,10 @@
                 return;
             }
             $this->Status = self::WAITING_FOR_PLAYER1;
+            if($update_time)
+            {
+                $this->Changed_Time = new Carbon();
+            }
             $this->save();
         }
 
