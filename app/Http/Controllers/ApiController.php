@@ -97,6 +97,7 @@
          * @throws InvalidPlayer
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
          * @throws \InvalidArgumentException
+         * @throws InvalidGame
          */
         public function game_whoami() : Game
         {
@@ -310,10 +311,12 @@
         }
 
         /**
-         * @param $game_id
+         * @param int $game_id
+         * @param int $skip
          *
          * @return \App\Models\Pawn[]
          * @throws InvalidGame
+         * @throws \InvalidArgumentException
          */
         public function get_pawns($game_id, $skip = 0) : array
         {
@@ -338,6 +341,7 @@
          *
          * @return Game|mixed[]
          * @throws InvalidGame
+         * @throws \InvalidArgumentException
          */
         public function get_game($game_id) : array
         {
@@ -357,7 +361,9 @@
          * @param $player_id
          *
          * @return Game[]||mixed[][]
+         * @throws InvalidGame
          * @throws InvalidPlayer
+         * @throws \InvalidArgumentException
          */
         public function get_games($player_id) : array
         {
@@ -380,6 +386,7 @@
          * @throws InvalidPlayer
          * @throws \App\Exceptions\Api\InvalidMove
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+         * @throws \InvalidArgumentException
          */
         public function play($game_id, $x, $y) : array
         {

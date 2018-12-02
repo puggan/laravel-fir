@@ -17,7 +17,7 @@
          * @return \Illuminate\Http\Response
          * @throws \InvalidArgumentException
          */
-        public function toResponse($request)
+        public function toResponse($request) : Response
         {
             $data = [
                 'ok' => FALSE,

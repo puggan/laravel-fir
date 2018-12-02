@@ -23,6 +23,7 @@
          * @param array $attributes
          *
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+         * @throws \Exception
          */
         public function __construct(array $attributes = [])
         {
@@ -46,7 +47,7 @@
                 catch(\Exception $e)
                 {
                     $this->Token = self::base64url_encode(
-                        $d = (new \DateTime())->format('y-m-d H:i:s u')
+                        (new \DateTime())->format('y-m-d H:i:s u')
                     );
                 }
             }

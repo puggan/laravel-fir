@@ -140,7 +140,7 @@
          *
          * @throws InvalidMove
          * @throws \Illuminate\Database\Eloquent\MassAssignmentException
-         * @throws InvalidGame
+         * @throws \InvalidArgumentException
          */
         public function play($x, $y) : void
         {
@@ -189,6 +189,7 @@
 
         /**
          * @throws InvalidGame
+         * @throws \InvalidArgumentException
          */
         public function validate_pawns() : void
         {
@@ -265,6 +266,7 @@
          *
          * @return mixed[][]
          * @throws InvalidGame
+         * @throws \InvalidArgumentException
          */
         public static function add_player_names($games) : array
         {
