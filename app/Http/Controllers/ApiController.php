@@ -374,7 +374,7 @@
             }
 
             $games = $player->games;
-            $games->sortBy('Changed_Time', 'desc');
+            $games->sortByDesc('Changed_Time');
 
             return Game::add_player_names($games);
         }
