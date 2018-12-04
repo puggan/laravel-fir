@@ -373,7 +373,10 @@
                 throw new InvalidPlayer('player not found');
             }
 
-            return Game::add_player_names($player->games);
+            $games = $player->games;
+            $games->sortBy('Changed_Time', 'desc');
+
+            return Game::add_player_names($games);
         }
 
         /**
