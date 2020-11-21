@@ -23,5 +23,14 @@ jobs:
         env:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_PHP: true
+          FILTER_REGEX_INCLUDE: '*.php'
+          VALIDATE_PHP_BUILTIN: true
           VALIDATE_PHP_PHPCS: true
+          #VALIDATE_PHP_PHPSTAN: true
+          #VALIDATE_PHP_PSALM: true
+          #VALIDATE_CSS: true
+          #VALIDATE_HTML: true
+          #VALIDATE_JAVASCRIPT_STANDARD: true
+          #VALIDATE_JAVASCRIPT_ES: true
+          #VALIDATE_TYPESCRIPT_STANDARD: true
+          #VALIDATE_TYPESCRIPT_ES: true
