@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ruleset name="super-linter">
+    <description>Link to the ruleset in the git-root folder</description>
+    <rule ref="../../.phpcs.xml" />
+</ruleset>
