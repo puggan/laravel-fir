@@ -2,20 +2,19 @@
     /** @var \App\Models\Game $game */
     /** @var string[][] $pawns */
 @endphp
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
         <title>Game {{ $game->Game_ID }}: {{ $game->player1->User_Name  }} vs {{ $game->player2->User_Name }}</title>
         <style>
-            .gameplan
-            {
+            .gameplan {
                 display: inline-block;
                 border: solid gray 5px;
                 background: gray;
             }
-            .pawn
-            {
+
+            .pawn {
                 display: inline-block;
                 margin: 5px;
                 height: 20px;
@@ -23,26 +22,26 @@
                 border-radius: 10px;
                 background: white;
             }
-            .pawn.pawn-red
-            {
+
+            .pawn.pawn-red {
                 background: red;
             }
-            .pawn.pawn-blue
-            {
+
+            .pawn.pawn-blue {
                 background: blue;
             }
         </style>
-	</head>
-	<body>
+    </head>
+    <body>
         <h1>Game {{ $game->Game_ID }}: {{ $game->player1->User_Name  }} vs {{ $game->player2->User_Name }}</h1>
-		<div class='gameplan'>
-@foreach($pawns as $row)
-            <div class='row'>
-    @foreach($row as $pawn_color)
-                <span class="pawn pawn-{{ $pawn_color }}"></span>
-    @endforeach
-            </div>
-@endforeach
+        <div class='gameplan'>
+            @foreach($pawns as $row)
+                <div class='row'>
+                    @foreach($row as $pawn_color)
+                        <span class="pawn pawn-{{ $pawn_color }}"></span>
+                    @endforeach
+                </div>
+            @endforeach
         </div>
-	</body>
+    </body>
 </html>

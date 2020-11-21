@@ -7,14 +7,17 @@
             li.closed > * {
                 display: none;
             }
+
             li > h3, li.closed > h3 {
                 display: block;
                 cursor: pointer;
             }
+
             li > h3 > span {
                 font-size: smaller;
                 color: blue;
             }
+
             dl > dt {
                 margin-top: 1em;
             }
@@ -360,23 +363,21 @@
             </li>
         </ul>
         <script>
-            var h3_click = function(event) {
+            var h3_click = function (event) {
                 var h3 = event.currentTarget;
                 var li = h3.parentElement;
                 console.log([li, h3, event]);
-                if(li.classList.contains('open')) {
+                if (li.classList.contains('open')) {
                     li.classList.add('closed');
                     li.classList.remove('open');
-                }
-                else {
+                } else {
                     li.classList.add('open');
                     li.classList.remove('closed');
                 }
             };
             var h3s = document.getElementsByTagName('h3');
             var h3_count = h3s.length;
-            for(var index = 0; index < h3_count; index++)
-            {
+            for (var index = 0; index < h3_count; index++) {
                 var h3 = h3s[index];
                 h3.parentElement.classList.add('closed');
                 h3.addEventListener('click', h3_click);

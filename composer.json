@@ -1,37 +1,37 @@
 {
-    "name": "puggan/laravel-fir",
-    "description": "Interface to tuffs 4-in-row game",
-    "type": "project",
-    "require": {
-        "php": "^7.3",
-        "fideloper/proxy": "^4.2.1",
-        "laravel/framework": "^5.8.35",
-        "laravel/tinker": "^1.0.10"
-    },
-    "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
-        "psr-4": {
-            "App\\": "app/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Thorbjörn Sundragon",
-            "email": "puggan@sundragon.se"
-        }
+  "name": "puggan/laravel-fir",
+  "description": "Interface to tuffs 4-in-row game",
+  "type": "project",
+  "require": {
+    "php": "^7.3",
+    "fideloper/proxy": "^4.2.1",
+    "laravel/framework": "^5.8.35",
+    "laravel/tinker": "^1.0.10"
+  },
+  "autoload": {
+    "classmap": [
+      "database/seeds",
+      "database/factories"
     ],
-    "config": {
-        "sort-packages": true,
-        "optimize-autoloader": true
-    },
-    "prefer-stable": true
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thorbjörn Sundragon",
+      "email": "puggan@sundragon.se"
+    }
+  ],
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "prefer-stable": true
 }

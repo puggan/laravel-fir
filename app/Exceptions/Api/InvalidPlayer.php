@@ -1,9 +1,9 @@
 <?php
 
-    namespace App\Exceptions\Api;
+namespace App\Exceptions\Api;
 
-    use App\Exceptions\ApiException;
+use App\Exceptions\ApiException;
 
-    class InvalidPlayer extends ApiException
-    {
-    }
+class InvalidPlayer extends ApiException
+{
+}

@@ -1,34 +1,33 @@
 <?php
 
-    namespace App\Providers;
+namespace App\Providers;
 
-    use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-    class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
+{
+    public function __construct(\Illuminate\Foundation\Application $app)
     {
-        public function __construct(\Illuminate\Foundation\Application $app)
-        {
-            /**
-             * The policy mappings for the application.
-             *
-             * @var array
-             */
-            $this->policies = [
-                'App\Model' => 'App\Policies\ModelPolicy',
-            ];
-
-            parent::__construct($app);
-        }
-
         /**
-         * Register any authentication / authorization services.
+         * The policy mappings for the application.
          *
-         * @return void
+         * @var array
          */
-        public function boot() : void
-        {
-            $this->registerPolicies();
+        $this->policies = [
+            'App\Model' => 'App\Policies\ModelPolicy',
+        ];
 
-            //
-        }
+        parent::__construct($app);
     }
+
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        $this->registerPolicies();
+        //
+    }
+}
